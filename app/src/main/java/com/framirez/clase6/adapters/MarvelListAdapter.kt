@@ -3,15 +3,18 @@ package com.framirez.clase6.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.framirez.clase6.R
+import com.framirez.clase6.db.CharacterEntity
+import com.framirez.clase6.helpers.SingleLiveEvent
 import com.framirez.clase6.network.models.Character
-import com.framirez.clase6.viewmodels.CreateCharacterViewModel
 import kotlinx.android.synthetic.main.marvel_character_cell.view.*
 
 class MarvelListAdapter(val clickListener: (Character) -> Unit) : RecyclerView.Adapter<MarvelListAdapter.MarvelCharacterViewHolder>() {
+
+    private val onAddCharacterFavClick: SingleLiveEvent<CharacterEntity> = SingleLiveEvent()
 
     var characterList: List<Character> = emptyList()
     set(value) {
@@ -28,13 +31,14 @@ class MarvelListAdapter(val clickListener: (Character) -> Unit) : RecyclerView.A
                     .load(formttedUrl)
                     .circleCrop()
                     .into(itemView.iv_picture)
-            itemView.setOnClickListener{
-                clickListener.invoke(character)
-            }
+//            itemView.setOnClickListener{
+//                clickListener.invoke(character)
+//            }
 
-            itemView.tv_name.setOnClickListener {
-
-            }
+//            itemView.tv_name.setOnClickListener {
+//                val fragment = MarvelListFragment()
+//                fragment.viewModelCreate.insertCharacter(CharacterEntity(UUID.randomUUID().toString(), "Felipe", "No sé qué poner", "menos"))
+//            }
         }
     }
 
@@ -48,5 +52,9 @@ class MarvelListAdapter(val clickListener: (Character) -> Unit) : RecyclerView.A
     }
 
     override fun getItemCount() = characterList.size
+
+    fun getOnAddCharacterFavClick(): LiveData<CharacterEntity?>? {
+        return onAddCharacterFavClick
+    }
 
 }

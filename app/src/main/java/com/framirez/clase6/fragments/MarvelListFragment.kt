@@ -1,11 +1,12 @@
 package com.framirez.clase6.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
@@ -21,7 +22,7 @@ import java.util.*
 class MarvelListFragment : Fragment() {
 
     private val viewModel: MarvelListViewModel by viewModels()
-    private val viewModelCreate: CreateCharacterViewModel by viewModels()
+    val viewModelCreate: CreateCharacterViewModel by viewModels()
     private val adapter = MarvelListAdapter { character ->
         findNavController().navigate(R.id.action_marvelListFragment_to_bottomMenuFragment)
     }
@@ -53,9 +54,15 @@ class MarvelListFragment : Fragment() {
             Snackbar.make(fr_parent, R.string.error_text , Snackbar.LENGTH_LONG).show()
         }
 
-        rcv_marvel.setOnClickListener {
-            viewModelCreate.insertCharacter(CharacterEntity(UUID.randomUUID().toString(), "Felipe", "No sé qué poner", "menos"))
+        adapter.getOnAddCharacterFavClick()?.observe(viewLifecycleOwner) {character ->
+            if (character != null) {
+                viewModelCreate.insertCharacter(CharacterEntity(UUID.randomUUID().toString(), character.name, character.description, character.picture))
+            }
         }
+//
+//        rcv_marvel.setOnClickListener {
+//            viewModelCreate.insertCharacter(CharacterEntity(UUID.randomUUID().toString(), "Felipe", "No sé qué poner", "menos"))
+//        }
 
     }
 }
