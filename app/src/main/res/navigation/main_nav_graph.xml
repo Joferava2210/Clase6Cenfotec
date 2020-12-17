@@ -9,14 +9,10 @@
         android:id="@+id/marvelListFragment"
         android:name="com.framirez.clase6.fragments.MarvelListFragment"
         android:label="fragment_marvel_list"
-        tools:layout="@layout/fragment_marvel_list" >
-        <action
-            android:id="@+id/action_marvelListFragment_to_bottomMenuFragment"
-            app:destination="@id/bottomMenuFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_marvel_list" />
     <fragment
-        android:id="@+id/bottomMenuFragment"
-        android:name="com.framirez.clase6.fragments.BottomMenuFragment"
-        android:label="fragment_bottom_menu"
-        tools:layout="@layout/fragment_bottom_menu" />
+        android:id="@+id/favoriteListFragment"
+        android:name="com.framirez.clase6.fragments.FavoriteListFragment"
+        android:label="fragment_favorite_list"
+        tools:layout="@layout/fragment_favorite_list" />
 </navigation>

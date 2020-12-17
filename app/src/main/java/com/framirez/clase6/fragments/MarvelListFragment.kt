@@ -24,7 +24,7 @@ class MarvelListFragment : Fragment() {
     private val viewModel: MarvelListViewModel by viewModels()
     val viewModelCreate: CreateCharacterViewModel by viewModels()
     private val adapter = MarvelListAdapter { character ->
-        findNavController().navigate(R.id.action_marvelListFragment_to_bottomMenuFragment)
+        //findNavController().navigate(R.id.action_marvelListFragment_to_bottomMenuFragment)
     }
 
     override fun onCreateView(

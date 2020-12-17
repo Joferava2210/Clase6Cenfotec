@@ -11,9 +11,11 @@ import com.framirez.clase6.db.CharacterEntity
 import com.framirez.clase6.helpers.SingleLiveEvent
 import com.framirez.clase6.network.models.Character
 import kotlinx.android.synthetic.main.marvel_character_cell.view.*
+import java.util.*
 
 class MarvelListAdapter(val clickListener: (Character) -> Unit) : RecyclerView.Adapter<MarvelListAdapter.MarvelCharacterViewHolder>() {
 
+    private val heroArrayList: List<CharacterEntity> = ArrayList<CharacterEntity>()
     private val onAddCharacterFavClick: SingleLiveEvent<CharacterEntity> = SingleLiveEvent()
 
     var characterList: List<Character> = emptyList()
@@ -31,14 +33,14 @@ class MarvelListAdapter(val clickListener: (Character) -> Unit) : RecyclerView.A
                     .load(formttedUrl)
                     .circleCrop()
                     .into(itemView.iv_picture)
+
 //            itemView.setOnClickListener{
 //                clickListener.invoke(character)
 //            }
 
-//            itemView.tv_name.setOnClickListener {
-//                val fragment = MarvelListFragment()
-//                fragment.viewModelCreate.insertCharacter(CharacterEntity(UUID.randomUUID().toString(), "Felipe", "No sé qué poner", "menos"))
-//            }
+            itemView.tv_description.setOnClickListener { view ->
+                onAddCharacterFavClick.postValue(CharacterEntity(UUID.randomUUID().toString(), character.name, character.description, formttedUrl))
+            }
         }
     }
 

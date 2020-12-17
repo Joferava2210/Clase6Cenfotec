@@ -19,7 +19,8 @@
         tools:listitem="@layout/marvel_character_cell"
         tools:itemCount="6"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:visibility="gone"/>
+        android:visibility="visible"/>
+
 
     <ProgressBar
         android:id="@+id/pb_loading"
