@@ -15,7 +15,6 @@ import java.util.*
 
 class MarvelListAdapter(val clickListener: (Character) -> Unit) : RecyclerView.Adapter<MarvelListAdapter.MarvelCharacterViewHolder>() {
 
-    private val heroArrayList: List<CharacterEntity> = ArrayList<CharacterEntity>()
     private val onAddCharacterFavClick: SingleLiveEvent<CharacterEntity> = SingleLiveEvent()
 
     var characterList: List<Character> = emptyList()
@@ -38,7 +37,8 @@ class MarvelListAdapter(val clickListener: (Character) -> Unit) : RecyclerView.A
 //                clickListener.invoke(character)
 //            }
 
-            itemView.tv_description.setOnClickListener { view ->
+            itemView.iv_favorite.setOnClickListener { view ->
+                itemView.iv_favorite.setBackgroundResource(R.drawable.ic_baseline_star_24)
                 onAddCharacterFavClick.postValue(CharacterEntity(UUID.randomUUID().toString(), character.name, character.description, formttedUrl))
             }
         }
